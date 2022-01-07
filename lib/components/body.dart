@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shopping/components/categories.dart';
 import 'package:flutter_shopping/constants/constant.dart';
+import 'package:flutter_shopping/models/product.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -7,6 +9,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
@@ -19,46 +22,29 @@ class Body extends StatelessWidget {
           ),
         ),
         Categories(),
-      ],
-    );
-  }
-}
-
-class Categories extends StatefulWidget {
-  const Categories({Key? key}) : super(key: key);
-
-  @override
-  _CategoriesState createState() => _CategoriesState();
-}
-
-class _CategoriesState extends State<Categories> {
-  List<String> categories = ["Handbag", "Clothing", "Shoes", "Accessories"];
-  int selectedIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 25,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
-        itemBuilder: (context, index) => GestureDetector(
-          onTap: () {
-            setState(() {
-              selectedIndex = index;
-            });
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-            child: Text(
-              categories[index],
-              style: TextStyle(
-                  color:
-                      index == selectedIndex ? Colors.black : Colors.grey[500]),
+        Column(
+          children: [
+            Container(
+              height: 180,
+              width: 160,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, 10),
+                    blurRadius: 30,
+                    color: Colors.blue.withOpacity(0.23),
+                  ),
+                ],
+              ),
+              child: Image.network(
+                  "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"),
             ),
-          ),
-        ),
-      ),
+            Text("Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops"),
+          ],
+        )
+      ],
     );
   }
 }
