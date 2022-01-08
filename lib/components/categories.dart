@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_shopping/constants/constant.dart';
+import 'package:flutter_shopping/controllers/categories_controller.dart';
+import 'package:get/get.dart';
 
 class Categories extends StatefulWidget {
   const Categories({Key? key}) : super(key: key);
@@ -11,7 +11,8 @@ class Categories extends StatefulWidget {
 }
 
 class _CategoriesState extends State<Categories> {
-  List<String> categories = ["Handbag", "Clothing", "Shoes", "Accessories"];
+  final categoriesController = Get.put(CategoriesController());
+
   int selectedIndex = 0;
 
   @override
@@ -20,26 +21,37 @@ class _CategoriesState extends State<Categories> {
       padding: const EdgeInsets.symmetric(vertical: defaultPadding),
       child: SizedBox(
         height: 25,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: categories.length,
-          itemBuilder: (context, index) => GestureDetector(
-            onTap: () {
-              setState(() {
-                selectedIndex = index;
-              });
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-              child: Text(
-                categories[index],
-                style: TextStyle(
-                    color: index == selectedIndex
-                        ? Colors.black
-                        : Colors.grey[500]),
-              ),
-            ),
-          ),
+        child: Container(
+          child: Obx(() {
+            // print(categoriesController.categories);
+            return categoriesController.loading == false
+                ? ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: categoriesController.categories.length,
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = index;
+                          // categoriesController.categories[index];
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: defaultPadding),
+                        child: Text(
+                          categoriesController.categories[index],
+                          style: TextStyle(
+                              color: index == selectedIndex
+                                  ? Colors.black
+                                  : Colors.grey[500]),
+                        ),
+                      ),
+                    ),
+                  )
+                : Center(
+                    child: CircularProgressIndicator(),
+                  );
+          }),
         ),
       ),
     );

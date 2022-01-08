@@ -28,7 +28,8 @@ class ProductsController extends GetxController {
   @override
   void onInit() {
     controller.addListener((pagination));
-    _loadData(_xPage, _perPage, category);
+    productList();
+    // _loadData(_xPage, _perPage, category);
 
     super.onInit();
   }
@@ -100,17 +101,16 @@ class ProductsController extends GetxController {
   Future<List<Product>> productList(
       // int ppage, int perPage, String? category
       ) async {
+    _loading.value = true;
     var productsList = await RemoteService.getProducts();
+    //  print(productsList![0].title);
     if (productsList != null) {
       products = productsList;
     }
 
-    // Map<String, dynamic> map = {
-    //   'page': ppage.toString(),
-    //   "perPage": perPage.toString()
-    // };
-    //final customer = await wo.loginCustomer(
-    //   username: "info@hugostore.uk", password: "Pd8379Hg!");
+    //print(products![0].title);
+
+    _loading.value = false;
 
     return productsList!;
   }
@@ -118,8 +118,6 @@ class ProductsController extends GetxController {
   // Future<Product> productById(int id) async {
 
   //   //Map<dynamic, int> map = {"page": 10, "perPage": 10};
-  //   //final customer = await wo.loginCustomer(
-  //   //   username: "info@hugostore.uk", password: "Pd8379Hg!");
 
   //  // return await wo.getProductById(id: id);
   // }

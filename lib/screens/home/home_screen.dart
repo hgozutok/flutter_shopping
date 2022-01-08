@@ -19,8 +19,8 @@ class HomeScreen extends StatelessWidget {
       elevation: 0,
       leading: IconButton(
         icon: Icon(
-          Icons.backspace,
-          color: Colors.black,
+          Icons.arrow_back,
+          color: Colors.greenAccent,
         ),
         onPressed: () {},
       ),
@@ -28,14 +28,14 @@ class HomeScreen extends StatelessWidget {
         IconButton(
           icon: Icon(
             Icons.search,
-            color: Colors.black,
+            color: Colors.greenAccent,
           ),
           onPressed: () {},
         ),
         IconButton(
           icon: Icon(
             Icons.shopping_bag,
-            color: Colors.black,
+            color: Colors.greenAccent,
           ),
           onPressed: () {},
         ),
