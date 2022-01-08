@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shopping/components/categories.dart';
 import 'package:flutter_shopping/constants/constant.dart';
 import 'package:flutter_shopping/controllers/product_controller.dart';
+import 'package:flutter_shopping/screens/product_screen.dart';
 import 'package:get/get.dart';
 
 class Body extends StatefulWidget {
@@ -62,52 +63,57 @@ class _BodyState extends State<Body> {
   }
 
   Widget ProductItem({product}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(
-          height: 180,
-          width: 160,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                offset: Offset(0, 10),
-                blurRadius: 30,
-                color: Colors.blue.withOpacity(0.23),
-              ),
-            ],
+    return GestureDetector(
+      onTap: () {
+        Get.to(ProductScreen(product: product));
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            height: 180,
+            width: 160,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(0, 10),
+                  blurRadius: 30,
+                  color: Colors.blue.withOpacity(0.23),
+                ),
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: defaultPadding / 3),
+              child: Image.network(product.image),
+            ),
           ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: defaultPadding / 3),
-            child: Image.network(product.image),
-          ),
-        ),
-        Text(
-          product.title,
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-          ),
-          textAlign: TextAlign.center,
-          overflow: TextOverflow.ellipsis,
-          softWrap: false,
-        ),
-        Center(
-          child: Text(
-            "€ " + product.price.toString(),
+          Text(
+            product.title,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 12,
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
-            softWrap: true,
+            softWrap: false,
           ),
-        ),
-      ],
+          Center(
+            child: Text(
+              "€ " + product.price.toString(),
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              softWrap: true,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
