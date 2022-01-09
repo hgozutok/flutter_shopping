@@ -22,88 +22,94 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        Center(
-          child: Text(
-            "Login",
-            style: TextStyle(
-              fontSize: 40,
-              fontWeight: FontWeight.bold,
+        body: Container(
+      padding: EdgeInsets.all(20),
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(
+            child: Text(
+              "Login",
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-        ),
-        SizedBox(height: 20),
-        Text(
-          "Username",
-        ),
-        TextField(
-          controller: usernameController,
-          onChanged: (value) {
-            username = value;
-          },
-          decoration: InputDecoration(
-            hintText: "Username",
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+          SizedBox(height: 20),
+          Text(
+            "Username",
+          ),
+          TextField(
+            controller: usernameController,
+            onChanged: (value) {
+              username = value;
+            },
+            decoration: InputDecoration(
+              hintText: "Username",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
           ),
-        ),
-        SizedBox(height: 20),
-        Text(
-          "Password",
-        ),
-        TextField(
-          controller: passwordController,
-          onChanged: (value) {
-            password = value;
-          },
-          decoration: InputDecoration(
-            hintText: "Password",
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+          SizedBox(height: 20),
+          Text(
+            "Password",
+          ),
+          TextField(
+            controller: passwordController,
+            onChanged: (value) {
+              password = value;
+            },
+            decoration: InputDecoration(
+              hintText: "Password",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
           ),
-        ),
-        SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () async {
-            LoginModel model = LoginModel(
-                username: usernameController.text,
-                password: passwordController.text);
-            var result = await authService.loginUser(model);
-            print(authService.token);
-            //  result.then((value) => print("res" + value));
-            if (authService.token != null) {
-              Get.snackbar(
-                "Login",
-                "logged in successfully",
-                duration: Duration(seconds: 3),
-              );
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () async {
+              LoginModel model = LoginModel(
+                  username: usernameController.text,
+                  password: passwordController.text);
+              var result = await authService.loginUser(model);
+              print(authService.token);
+              //  result.then((value) => print("res" + value));
+              if (authService.token != null) {
+                Get.snackbar(
+                  "Login",
+                  "logged in successfully",
+                  duration: Duration(seconds: 3),
+                );
+                Get.to(HomeScreen());
+              } else {
+                Get.snackbar(
+                  "Login",
+                  "Invalid login credentials",
+                  duration: Duration(seconds: 3),
+                );
+              }
+            },
+            child: Text("Login"),
+          ),
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text("Register"),
+          ),
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
               Get.to(HomeScreen());
-            } else {
-              Get.snackbar(
-                "Login",
-                "Invalid login credentials",
-                duration: Duration(seconds: 3),
-              );
-            }
-          },
-          child: Text("Login"),
-        ),
-        SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () {},
-          child: Text("Register"),
-        ),
-        SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () {
-            Get.to(HomeScreen());
-          },
-          child: Text("Go Home"),
-        ),
-      ],
+            },
+            child: Text("Go Home"),
+          ),
+        ],
+      ),
     ));
   }
 }
