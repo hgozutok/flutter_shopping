@@ -60,17 +60,11 @@ class CategoriesController extends GetxController {
   Future<List<dynamic>> getCategories() async {
     _loading.value = true;
     var cats = await RemoteService.getCategories();
-    print(cats);
+
     if (cats != null) {
-      print(cats);
-      // for (var cat in cats) {
-      //   categories.add(cat[]);
-      // }
       categories = cats;
     }
-    // categories = cats!;
 
-    print(categories);
     _loading.value = false;
     return categories;
   }

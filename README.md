@@ -5,4 +5,8 @@ https://fakestoreapi.com/
 
 developed by Hugo for educational purposes.
 
-gozutok.info
+added login screen
+
+cart is fake
+
+https://gozutok.info

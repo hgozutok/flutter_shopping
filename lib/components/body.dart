@@ -102,7 +102,7 @@ class _BodyState extends State<Body> {
           ),
           Center(
             child: Text(
-              "€ " + product.price.toString(),
+              "\$${product.price}",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,

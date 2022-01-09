@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shopping/components/body.dart';
 import 'package:flutter_shopping/constants/constant.dart';
+import 'package:flutter_shopping/screens/home/login_screen.dart';
+import 'package:flutter_shopping/screens/profile.dart';
+import 'package:flutter_shopping/services/auth_service.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,6 +18,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   AppBar buildAppBar() {
+    AuthService authService = Get.put(AuthService());
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
@@ -38,6 +43,19 @@ class HomeScreen extends StatelessWidget {
             color: Colors.greenAccent,
           ),
           onPressed: () {},
+        ),
+        IconButton(
+          icon: Icon(
+            Icons.person,
+            color: Colors.greenAccent,
+          ),
+          onPressed: () {
+            print(authService.token);
+            authService.token != null
+                ? Get.to(ProfileScreen())
+                : Get.to(LoginScreen());
+            //  Get.to(LoginScreen());
+          },
         ),
         SizedBox(width: defaultPadding / 2),
       ],
